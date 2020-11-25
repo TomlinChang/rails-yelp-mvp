@@ -3,18 +3,23 @@
   <li>Address: <%=  @restaurant.address %></li>
   <li>Phone number: <%=  @restaurant.phone_number %></li>
   <li>Cusine: <%=  @restaurant.category %></li>
-  <li>Rating: <% @restaurant.reviews.each do |review| %>
-    <%= review.rating %>
-    <% end %>
-  </li>
-    <ul>
-       <li>Comments: <% @restaurant.reviews.each do |review| %>
-    <%= review.content %>
-    <% end %>
-  </li>
-    </ul>
+  <% @restaurant.reviews.each do |review| %>
+    <li>Rating:
+      <%= review.rating %>
+      <ul>
+        <li><%= review.content %></li>
+      </ul>
+    </li>
+  <% end %>
 </ul>
 
-<h4><%= link_to 'Add a rating', new_restaurant_review_path(@restaurant) %></h4>
+<h2>Add a new review!</h2>
+
+<%= simple_form_for [@restaurant, @review] do |f| %>
+  <%= f.input :rating %>
+  <%= f.input  :content %>
+  <%= f.submit "Submit", class: "btn btn-primary"%>
+<% end %>
+<!-- <h4><%#= link_to 'Add a rating', new_restaurant_review_path(@restaurant) %></h4> -->
 
 <h3><%= link_to 'Back to main page', restaurants_path %></h3>

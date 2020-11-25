@@ -3,4 +3,18 @@
   <li>Address: <%=  @restaurant.address %></li>
   <li>Phone number: <%=  @restaurant.phone_number %></li>
   <li>Cusine: <%=  @restaurant.category %></li>
+  <li>Rating: <% @restaurant.reviews.each do |review| %>
+    <%= review.rating %>
+    <% end %>
+  </li>
+    <ul>
+       <li>Comments: <% @restaurant.reviews.each do |review| %>
+    <%= review.content %>
+    <% end %>
+  </li>
+    </ul>
 </ul>
+
+<h4><%= link_to 'Add a rating', new_restaurant_review_path(@restaurant) %></h4>
+
+<h3><%= link_to 'Back to main page', restaurants_path %></h3>
